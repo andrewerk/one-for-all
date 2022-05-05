@@ -1,0 +1,190 @@
+DROP DATABASE IF EXISTS SpotifyClone;
+
+CREATE DATABASE SpotifyClone;
+
+CREATE TABLE SpotifyClone.plans(
+    plan_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    plan_name varchar(45) NOT NULL,
+    price DECIMAL(5,2) NOT NULL
+) engine = InnoDB;
+
+CREATE TABLE SpotifyClone.users(
+    user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username varchar(45) NOT NULL,
+    age TINYINT NOT NULL,
+    plan_id INT NOT NULL,
+    signup_date DATE NOT NULL,
+    FOREIGN KEY (plan_id) REFERENCES plans (plan_id)
+) engine = InnoDB;
+
+CREATE TABLE SpotifyClone.artists(
+    artist_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    artirst_name VARCHAR(45) NOT NULL
+) engine = InnoDB;
+
+CREATE TABLE SpotifyClone.albums(
+    album_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    album_name INT NOT NULL,
+    artist_id SMALLINT NOT NULL,
+    launch_date YEAR NOT NULL,
+    FOREIGN KEY (artist_id) REFERENCES artists (artist_id)
+) engine = InnoDB;
+
+CREATE TABLE SpotifyClone.songs(
+    song_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    album_id INT NOT NULL,
+    lenght_seconds SMALLINT NOT NULL,
+    song_name VARCHAR(45) NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES albums (album_id)
+) engine = InnoDB;
+
+CREATE TABLE artist_user(
+    user_id INTEGER,
+    artist_id INTEGER,
+    CONSTRAINT PRIMARY KEY(user_id, artist_id),
+    FOREIGN KEY (artist_id) REFERENCES artists (artist_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+) engine = InnoDB;
+
+CREATE TABLE user_reproductions(
+    user_id INTEGER,
+    song_id INTEGER,
+    reproduction_date DATETIME NOT NULL
+    CONSTRAINT PRIMARY KEY(user_id, song_id),
+    FOREIGN KEY (song_id) REFERENCES songs (song_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+) engine = InnoDB;
+
+
+
+
+
+INSERT INTO SpotifyClone.plans (plan_name, price)
+VALUES
+  ('gratuito', 0),
+  ('universitario', 5.99),
+  ('pessoal', 6.99)
+  ('familiar', 7.99);
+
+INSERT INTO SpotifyClone.users (usarname, age, plan_id, signup_date)
+VALUES
+  ('Thati', 23, 1, '2019-10-20'),
+  ('Cintia', 35, 4, '2017-12-30'),
+  ('Bill', 20, 2, '2019-06-05'),
+  ('Roger', 45, 3, '2020-05-13'),
+  ('Norman', 58, 3, '2017-02-17'),
+  ('Patrick', 33, 4, '2017-01-06'),
+  ('Vivian', 26, 2, '2018-01-05'),
+  ('Carol', 19, 2, '2018-02-14'),
+  ('Angelina', 42, 4, '2018-04-29'),
+  ('Paul', 46, 4, '2017-01-17');
+
+INSERT INTO SpotifyClone.artits (artist_name)
+VALUES
+  ('Walter Phoenix'),
+  ('Peter Srong'),
+  ('Lance Day'),
+  ('Freedie Shannon'),
+  ('Tyler Isle',),
+  ('Fog');
+
+
+INSERT INTO SpotifyClone.artits (album_name, artist_id, launch_date)
+VALUES
+  ('Envious', 1, '1990'),
+  ('Exuberant', 1),
+  ('Hallowed Steam', 2),
+  ('Incandescent', 3),
+  ('Temporary Culture', 4),
+  ('Library of Liberty', 4)
+  ('Chained Down', 5)
+  ('Cabinet of fools', 5)
+  ('No guarantees', 5)
+  ('Apparatus', 6);
+
+
+
+
+
+INSERT INTO SpotifyClone.songs (album_id, lenght_seconds, song_name)
+VALUES
+  (1, 200, 'Soul For Use'),
+  (1, 163, 'Reflections Of Magic'),
+  (1, 116, 'Dance With Her Own'),
+  (2, 203, 'Troubles Of My Inner Fire'),
+  (2, 152, 'Time Fireworks'),
+  (3, 105, 'Magic Circus'),
+  (3, 207, 'Honey, So Do I'),
+  (3, 139, "Sweetie, Let's Go Wild"),
+  (3, 244, 'She Knows'),
+  (4, 100, 'Fantasy For Me'),
+  (4, 146, 'Celebration Of More'),
+  (4, 223, 'Rock His Everything'),
+  (4, 231, 'Home Forever'),
+  (4, 241, 'Diamond Power"'),
+  (4, 132, "Let's Be Silly"),
+  (5, 240, 'Thang Of Thunder'),
+  (5, 185, 'Words Of Her Life'),
+  (5, 176, 'Without My Streets'),
+  (6, 190, 'Need Of The Evening'),
+  (6, 222, 'History Of My Roses'),
+  (6, 111, 'Without My Love'),
+  (6, 123, 'Walking And Game'),
+  (6, 197, 'Young And Father'),
+  (7, 179, 'Finding My Traditions'),
+  (7, 229, 'Walking And Man"'),
+  (7, 135, 'Hard And Time'),
+  (7, 150, "Honey, I'm A Lone Wolf"),
+  (8, 166, "She Thinks I Won't Stay Tonight"),
+  (8, 154, "He Heard You're Bad For Me"),
+  (8, 210, "He Hopes We Can't Stay"),
+  (8, 117, "I Know I Know"),
+  (9, 159, "He's Walking Away"),
+  (9, 138, "He's Trouble"),
+  (9, 120,  "I Heard I Want To Bo Alone"),
+  (9, 151, "I Ride Alone"),
+  (10, 79, 'Honey'),
+  (10, 95, "You Cheated On Me"),
+  (10, 213, "Wouldn't It Be Nice"),
+  (10, 136, "Baby"),
+  (10, 83, "You Make Me Feel So..");
+
+  INSERT INTO SpotifyClone.user_reproductions(user_id, song_id, reproduction_date)
+VALUES
+  (1,36, '2020-02-28 10:45:55'),
+  (1,25, '2020-05-02 05:30:35'),
+  (1, 23, '2020-03-06 11:22:33'),
+  (1, 14, '2020-08-05 08:05:17'),
+  (1, 15, '2020-09-14 16:32:22'),
+  (2, 34, '2020-01-02 07:40:33'),
+  (2, 24, '2020-05-16 06:16:22'),
+  (2, 21, '2020-09-21 13:14:46'),
+  
+
+2020-01-02 07:40:33"; "2020-05-16 06:16:22"; "2020-10-09 12:27:48"; "2020-09-21 13:14:46"
+
+INSERT INTO SpotifyClone.artits _user(user_id, artist_id)
+VALUES
+  (1,1),
+  (1,4),
+  (1,3),
+  (2,1),
+  (2,3),
+  (3,2),
+  (3,1),
+  (4,4),
+  (5,5),
+  (5,6),
+  (6,6),
+  (6,3),
+  (6,1),
+  (7,2),
+  (7,5),
+  (8,1),
+  (8,5),
+  (9,6),
+  (9,4),
+  (9,3),
+  (10,2),
+  (10,6);
+
