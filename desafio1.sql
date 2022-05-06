@@ -121,7 +121,7 @@ VALUES
   (4, 146, 'Celebration Of More'),
   (4, 223, 'Rock His Everything'),
   (4, 231, 'Home Forever'),
-  (4, 241, 'Diamond Power"'),
+  (4, 241, 'Diamond Power'),
   (4, 132, "Let's Be Silly"),
   (5, 240, 'Thang Of Thunder'),
   (5, 185, 'Words Of Her Life'),
