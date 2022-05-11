@@ -132,7 +132,7 @@ VALUES
   (6, 123, 'Walking And Game'),
   (6, 197, 'Young And Father'),
   (7, 179, 'Finding My Traditions'),
-  (7, 229, 'Walking And Man"'),
+  (7, 229, 'Walking And Man'),
   (7, 135, 'Hard And Time'),
   (7, 150, "Honey, I'm A Lone Wolf"),
   (8, 166, "She Thinks I Won't Stay Tonight"),
